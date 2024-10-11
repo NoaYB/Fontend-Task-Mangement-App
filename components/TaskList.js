@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { getTasks, addTask, updateTask, deleteTask } from '../api'; // ייבוא הפונקציות
+import { getTasks, addTask, updateTask, deleteTask } from '../api'; // Import functions
 
 const TaskList = () => {
-    const [tasks, setTasks] = useState([]); // מצב לאחסון משימות
-    const [newTask, setNewTask] = useState(''); // מצב לאחסון משימה חדשה
+    const [tasks, setTasks] = useState([]); // State to store tasks
+    const [newTask, setNewTask] = useState(''); // State to store new task
 
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const tasksFromAPI = await getTasks(); // קבלת המשימות מה-API
-                console.log('Fetched tasks:', tasksFromAPI); // לוג של המשימות המתקבלות
-                setTasks(tasksFromAPI); // עדכון מצב המשימות
+                const tasksFromAPI = await getTasks(); // Fetch tasks from the API
+                console.log('Fetched tasks:', tasksFromAPI); // Log the fetched tasks
+                setTasks(tasksFromAPI); // Update tasks state
             } catch (error) {
-                console.error('Error fetching tasks:', error); // טיפול בשגיאות
+                console.error('Error fetching tasks:', error); // Handle errors
             }
         };
         fetchTasks();
-    }, []); // רץ רק בפעם הראשונה שהרכיב נטען
+    }, []); // Runs only once when the component is mounted
 
     const handleAddTask = async (e) => {
-        e.preventDefault(); // מניעת רענון דף
-        const taskData = { description: newTask, completed: false }; // הגדרת נתוני המשימה
-        const addedTask = await addTask(taskData); // הוספת המשימה ל-API
-        setTasks([...tasks, addedTask]); // עדכון רשימת המשימות
-        setNewTask(''); // ניקוי שדה הקלט
+        e.preventDefault(); // Prevent page refresh
+        const taskData = { description: newTask, completed: false }; // Define task data
+        const addedTask = await addTask(taskData); // Add task to the API
+        setTasks([...tasks, addedTask]); // Update task list
+        setNewTask(''); // Clear input field
     };
 
     const handleUpdateTask = async (taskId) => {
-        const updatedTask = await updateTask(taskId); // עדכון המשימה
-        setTasks(tasks.map(task => (task.id === taskId ? updatedTask : task))); // עדכון המצב עם המשימה המעודכנת
+        const updatedTask = await updateTask(taskId); // Update the task
+        setTasks(tasks.map(task => (task.id === taskId ? updatedTask : task))); // Update state with the updated task
     };
 
     const handleDeleteTask = async (taskId) => {
-        await deleteTask(taskId); // מחיקת המשימה
-        setTasks(tasks.filter(task => task.id !== taskId)); // עדכון הרשימה
+        await deleteTask(taskId); // Delete the task
+        setTasks(tasks.filter(task => task.id !== taskId)); // Update the list
     };
 
     return (
@@ -43,7 +43,7 @@ const TaskList = () => {
                 <input
                     type="text"
                     value={newTask}
-                    onChange={(e) => setNewTask(e.target.value)} // עדכון השדה
+                    onChange={(e) => setNewTask(e.target.value)} // Update the input field
                     required
                 />
                 <button type="submit">Add Task</button>
