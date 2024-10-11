@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTasks, addTask, updateTask, deleteTask } from '../api'; // ייבוא הפונקציות
+import { getTasks, addTask, updateTask, deleteTask } from '../api'; // Import functions
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -22,7 +22,7 @@ const TaskList = () => {
     };
 
     const handleUpdateTask = async (taskId) => {
-        // כאן תוכל להוסיף לוגיקה לעדכון המשימה
+        // Here you can add logic to update the task
         const updatedTask = await updateTask(taskId);
         setTasks(tasks.map(task => (task.id === taskId ? updatedTask : task)));
     };
@@ -41,7 +41,7 @@ const TaskList = () => {
                     value={newTask}
                     onChange={(e) => setNewTask(e.target.value)}
                     required
-                    placeholder="Add a new task" // טקסט רמז בטופס
+                    placeholder="Add a new task" // Placeholder text in the form
                 />
                 <button type="submit">Add Task</button>
             </form>
@@ -59,4 +59,3 @@ const TaskList = () => {
 };
 
 export default TaskList;
-
