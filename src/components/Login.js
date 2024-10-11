@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../api'; // ייבוא הפונקציה להתחברות
+import { loginUser } from '../api'; // Import function for login
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -9,8 +9,8 @@ const Login = () => {
         e.preventDefault();
         const userData = { username, password };
         const response = await loginUser(userData);
-        localStorage.setItem('token', response.data.access_token); // שמירה של הטוקן
-        // ניתן להוסיף ניווט או התראה לאחר ההתחברות
+        localStorage.setItem('token', response.data.access_token); // Save the token
+        // Navigation or notification can be added after login
     };
 
     return (
