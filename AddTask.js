@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addTask } from '../api'; // ייבוא הפונקציה להוספת משימות
+import { addTask } from '../api'; // Import function for adding tasks
 
 const AddTask = () => {
     const [description, setDescription] = useState('');
@@ -9,7 +9,7 @@ const AddTask = () => {
         e.preventDefault();
         const taskData = { description };
         await addTask(taskData, token);
-        setDescription(''); // לנקות את השדה לאחר הוספה
+        setDescription(''); // Clear the field after adding
     };
 
     return (
