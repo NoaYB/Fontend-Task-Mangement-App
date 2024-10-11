@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { registerUser } from '../api'; // ייבוא הפונקציה להרשמה
+import { registerUser } from '../api'; // Import the registration function
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -9,8 +9,7 @@ const Register = () => {
         e.preventDefault();
         const userData = { username, password };
         await registerUser(userData);
-        // ניתן להוסיף התנהגות לאחר ההרשמה (כמו ניווט או התראה)
-    };
+       
 
     return (
         <form onSubmit={handleSubmit}>
