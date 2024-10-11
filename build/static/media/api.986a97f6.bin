@@ -1,0 +1,43 @@
+import axios from 'axios';
+
+const API_URL = 'http://127.0.0.1:8000'; // עדכן לפי הכתובת של ה-backend שלך
+
+export const registerUser = async (userData) => {
+    return await axios.post(`${API_URL}/register`, userData);
+};
+
+export const loginUser = async (userData) => {
+    return await axios.post(`${API_URL}/login`, userData);
+};
+
+export const getTasks = async (token) => {
+    return await axios.get(`${API_URL}/tasks`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
+export const addTask = async (taskData, token) => {
+    return await axios.post(`${API_URL}/tasks`, taskData, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
+export const updateTask = async (id, taskData, token) => {
+    return await axios.put(`${API_URL}/tasks/${id}`, taskData, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
+export const deleteTask = async (id, token) => {
+    return await axios.delete(`${API_URL}/tasks/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
